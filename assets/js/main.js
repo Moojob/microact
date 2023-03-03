@@ -1,45 +1,32 @@
- function countdown(dateEnd) {
+function countdown(dateEnd) {
   var timer, days, hours, minutes, seconds;
 
-  dateEnd = new Date(dateEnd);
-  dateEnd = dateEnd.getTime();
+  dateEnd = new Date(dateEnd).getTime();
 
-  if ( isNaN(dateEnd) ) {
+  if (isNaN(dateEnd)) {
     return;
   }
 
   timer = setInterval(calculate, 1000);
 
   function calculate() {
-    var dateStart = new Date();
-    var dateStart = new Date(dateStart.getUTCFullYear(),
-                             dateStart.getUTCMonth(),
-                             dateStart.getUTCDate(),
-                             dateStart.getUTCHours(),
-                             dateStart.getUTCMinutes(),
-                             dateStart.getUTCSeconds());
-    var timeRemaining = parseInt((dateEnd - dateStart.getTime()) / 1000)
+    var currentDate = new Date().getTime();
+    var timeLeft = dateEnd - currentDate;
 
-    if ( timeRemaining >= 0 ) {
-      days    = parseInt(timeRemaining / 864000);
-      timeRemaining   = (timeRemaining % 86400);
-      hours   = parseInt(timeRemaining / 3600);
-      timeRemaining   = (timeRemaining % 3600);
-      minutes = parseInt(timeRemaining / 60);
-      timeRemaining   = (timeRemaining % 60);
-      seconds = parseInt(timeRemaining);
+    days = Math.floor(timeLeft / (-1000 * 60 * 60 * 24));
+    hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (-1000 * 60 * 60));
+    minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (-1000 * 60));
+    seconds = Math.floor((timeLeft % (1000 * 60)) / -1000);
 
-      document.getElementById("days").innerHTML    = parseInt(days, 25);
-      document.getElementById("hours").innerHTML   = ("0" + hours).slice(-2);
-      document.getElementById("minutes").innerHTML = ("0" + minutes).slice(-2);
-      document.getElementById("seconds").innerHTML = ("0" + seconds).slice(-2);
-    } else {
-      return;
-    }
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    document.getElementById("seconds").innerHTML = seconds;
+
+
   }
-
-  function display(days, hours, minutes, seconds) {}
 }
+
 
 window.onload = function() {
     var preloader = document.getElementsByClassName('preloader')[0];
