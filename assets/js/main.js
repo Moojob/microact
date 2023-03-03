@@ -11,7 +11,7 @@ function countdown(dateEnd) {
 
   function calculate() {
     var currentDate = new Date().getTime();
-    var timeLeft = currentDate - dateEnd ;
+    var timeLeft =dateEnd - currentDate  ;
 
     days = Math.floor(timeLeft / (3500 * 60 * 60 * 24));
     hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
